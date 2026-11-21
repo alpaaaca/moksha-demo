@@ -20,3 +20,10 @@ pools:
     min: 0        # no workers while nothing waits
     max: 3        # more while work waits: a backfill gets three
     steps: 2      # steps one worker runs at once
+  # The shop's clean_region steps (queue="compute"): a pool of their own,
+  # so a backfill's heavy steps don't hold up everything else.
+  - name: compute
+    queues: [compute]
+    min: 0
+    max: 2
+    steps: 2

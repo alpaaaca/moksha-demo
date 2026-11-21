@@ -1,0 +1,11 @@
+{"order_id":53116,"customer":"c0869","currency":"BRL","lines":[{"sku":"KB-01","qty":1,"unit_price":505.43}]}
+{"order_id":53117,"customer":"c0333","currency":"BRL","lines":[{"sku":"HP-05","qty":2,"unit_price":579.35},{"sku":"HD-01","qty":2,"unit_price":204.01}]}
+{"order_id":53118,"customer":"c0780","currency":"BRL","lines":[{"sku":"MS-02","qty":1,"unit_price":135.1},{"sku":"DK-01","qty":1,"unit_price":881.7}]}
+{"order_id":53119,"customer":"c0524","currency":"BRL","lines":[{"sku":"KB-01","qty":1,"unit_price":504.65},{"sku":"DK-01","qty":1,"unit_price":970.17}]}
+{"order_id":53120,"customer":"c0773","currency":"BRL","lines":[{"sku":"HD-01","qty":1,"unit_price":202.55}]}
+{"order_id":53121,"customer":"c0895","currency":"BRL","lines":[{"sku":"KB-01","qty":1,"unit_price":515.9}]}
+{"order_id":53122,"customer":"c0075","currency":"BRL","lines":[{"sku":"HP-05","qty":1,"unit_price":557.68},{"sku":"HD-01","qty":1,"unit_price":202.05}]}
+{"order_id":53123,"customer":"c0751","currency":"BRL","lines":[{"sku":"HP-05","qty":1,"unit_price":538.14},{"sku":"KB-01","qty":1,"unit_price":517.84}]}
+{"order_id":53124,"customer":"c0844","currency":"BRL","lines":[{"sku":"MN-32","qty":1,"unit_price":2476.74},{"sku":"LT-14","qty":3,"unit_price":6511.9}]}
+{"order_id":53125,"customer":"c0578","currency":"BRL","lines":[{"sku":"SP-02","qty":1,"unit_price":424.79},{"sku":"MN-32","qty":1,"unit_price":2484.19},{"sku":"LT-14","qty":3,"unit_price":5954.69}]}
+{"order_id":53126,"customer":"c0233","currency":"BRL","lines":[{"sku":"SP-02","qty":3,"unit_price":372.17},{"sku":"KB-01","qty":2,"unit_price":531.45}]}
