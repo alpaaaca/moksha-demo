@@ -4,4 +4,5 @@ ARG WORKER_IMAGE=ghcr.io/alpaaaca/moksha-worker:0.2.1
 FROM ${WORKER_IMAGE}
 COPY pyproject.toml /app/
 COPY revenue /app/revenue
+COPY shop /app/shop
 COPY data /app/data

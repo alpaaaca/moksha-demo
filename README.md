@@ -13,6 +13,8 @@ Run it on your machine with `moksha dev`, then on a Kubernetes cluster
 |---|---|
 | `moksha.yaml` | the project: its name, how its image is built, its pool of workers (0 to 3) |
 | `revenue/` | the pipelines and steps ([pipelines.py](revenue/pipelines.py), [nightly.py](revenue/nightly.py)) |
+| `shop/` | a bigger example: fan-out, retries, an approval gate, sub-runs, a subscription, a long-running poll ([below](#a-bigger-example-the-shop)) |
+| `tests/` | the shop's pipelines tested without a server (`moksha.testing`) |
 | `pyproject.toml` | the modules the worker imports (`[tool.moksha]`) |
 | `Dockerfile` | the project's image: moksha's worker image and this code |
 | `kind/` | a local cluster and registry for the Kubernetes part |
@@ -89,6 +91,70 @@ Things to try:
   the runs pick up where they were, and finished steps aren't run again.
 
 `rm -rf .moksha` forgets every run and data version.
+
+## A bigger example: the shop
+
+[shop/](shop/) closes the books of an online shop with four regions
+(eu, us, apac, latam), from a month of source data in
+[data/shop/](data/shop/) ([generate.py](data/shop/generate.py) writes it,
+with a few surprises built in). It deploys with the same project, so
+`moksha dev` already runs it; `clean_region` runs on a pool of its own
+(`compute` in [moksha.yaml](moksha.yaml)).
+
+| Pipeline | What it shows |
+|---|---|
+| `daily_close` ([close.py](shop/close.py)) | fan-out with `step_async`/`gather` and `max_parallel`; retries with backoff (a flaky FX API, a late file), `NonRetryable`, catching `StepFailed` to close a day partial; a gate that compares the day with the week before (`ctx.latest_version` and the versions' meta) and waits for a person (`wait_signal`, with a timeout) |
+| `month_end` ([month.py](shop/month.py)) | closes the month's open days as sub-runs (`ctx.run`, `RunFailed`), then rolls the month up |
+| `refresh_dashboard` ([dashboard.py](shop/dashboard.py)) | starts by itself on new daily summaries (`Subscription`, debounced), redraws an HTML dashboard; `Keep` retention |
+| `watch_returns` ([returns.py](shop/returns.py)) | a run that polls an inbox until told to stop: a signal wait as an interruptible sleep, `continue_as_new` to keep its history short |
+
+With `moksha dev` running:
+
+```bash
+moksha replay daily_close --param day=2026-10-01..2026-10-16
+```
+
+Sixteen days close, four regions each; latam's file for 10-09 never
+came, so its extract retries three times and that day closes partial.
+`fx_rates` fails about one call in three (`FX_FAILURE_RATE`): the step
+pages show its attempts. A few seconds after the last day,
+`refresh_dashboard` runs once for all of them.
+
+```bash
+moksha start daily_close --param day=2026-10-17
+```
+
+The flash sale: apac sells six times its weekly mean, and the run stops
+to wait for a person (the web UI says so). Approve it, with the run ID
+`moksha start` printed:
+
+```bash
+moksha signal <run> approve --data '{"by": "ana"}'
+```
+
+or reject it (`--data '{"by": "ana", "reject": "duplicated feed"}'`):
+the run fails, and the day stays open. Then the rest of the month:
+
+```bash
+moksha start month_end --param month=2026-10 --wait
+```
+
+It finds 10-18 to 10-31 not closed, closes each in a sub-run
+(auto-approved), and writes the month's report. Run it again: no sub-runs,
+and `monthly_rollup` is reused.
+
+Things to try:
+
+- **Returns**: `moksha start watch_returns`, then drop a file into the
+  inbox: `echo '{"order_id": 50012, "sku": "MS-02", "qty": 1, "reason":
+  "defective"}' > data/shop/returns/inbox/2026-10-21-0001.json`. It
+  records it within 15 seconds; after 20 polls it continues as a new
+  run. `moksha signal <run> stop` ends it.
+- **A source fixed late**: copy `data/shop/orders/latam/2026-10-08.jsonl`
+  to `2026-10-09.jsonl` and replay 10-09: latam is in, the other
+  regions' cleans are reused, and the dashboard redraws.
+- **Tests**: `python -m pytest tests` (or `python tests/test_shop.py`)
+  runs every branch above against scripted results, in a second.
 
 ## On Kubernetes: kind, `helm install`, `moksha deploy`
 

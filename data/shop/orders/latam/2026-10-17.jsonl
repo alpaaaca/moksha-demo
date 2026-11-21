@@ -1,0 +1,16 @@
+{"order_id":53150,"customer":"c0086","currency":"BRL","lines":[{"sku":"KB-01","qty":1,"unit_price":542.78},{"sku":"LT-14","qty":1,"unit_price":5842.37},{"sku":"MN-27","qty":1,"unit_price":1679.2}]}
+{"order_id":53151,"customer":"c0411","currency":"BRL","lines":[{"sku":"HP-05","qty":1,"unit_price":602.49},{"sku":"CB-10","qty":2,"unit_price":68.24}]}
+{"order_id":53152,"customer":"c0681","currency":"BRL","lines":[{"sku":"CB-10","qty":1,"unit_price":71.73}]}
+{"order_id":53153,"customer":"c0254","currency":"BRL","lines":[{"sku":"MS-02","qty":1,"unit_price":147.04},{"sku":"MN-27","qty":1,"unit_price":1674.99}]}
+{"order_id":53154,"customer":"c0203","currency":"BRL","lines":[{"sku":"HP-05","qty":1,"unit_price":593.43}]}
+{"order_id":53155,"customer":"c0071","currency":"BRL","lines":[{"sku":"CB-10","qty":1,"unit_price":64.49}]}
+{"order_id":53156,"customer":"c0054","currency":"BRL","lines":[{"sku":"MN-32","qty":1,"unit_price":2655.7},{"sku":"KB-01","qty":2,"unit_price":515.34}]}
+{"order_id":53157,"customer":"c0289","currency":"BRL","lines":[{"sku":"HP-05","qty":3,"unit_price":579.96}]}
+{"order_id":53158,"customer":"c0609","currency":"BRL","lines":[{"sku":"KB-01","qty":1,"unit_price":517.98}]}
+{"order_id":53159,"customer":"c0657","currency":"BRL","lines":[{"sku":"MN-27","qty":2,"unit_price":1669.75}]}
+{"order_id":53160,"customer":"c0333","currency":"BRL","lines":[{"sku":"MS-02","qty":2,"unit_price":137.23},{"sku":"HP-05","qty":2,"unit_price":609.0}]}
+{"order_id":53161,"customer":"c0017","currency":"BRL","lines":[{"sku":"HD-01","qty":2,"unit_price":195.59}]}
+{"order_id":53162,"customer":"c0723","currency":"BRL","lines":[{"sku":"CB-10","qty":3,"unit_price":68.44}]}
+{"order_id":53163,"customer":"c0003","currency":"BRL","lines":[{"sku":"SP-02","qty":1,"unit_price":377.99},{"sku":"HD-01","qty":1,"unit_price":190.03},{"sku":"KB-01","qty":1,"unit_price":535.81}]}
+{"order_id":53164,"customer":"c0140","currency":"BRL","lines":[{"sku":"MN-32","qty":1,"unit_price":2663.97}]}
+{"order_id":53165,"customer":"c0663","currency":"BRL","lines":[{"sku":"MN-32","qty":1,"unit_price":2774.32}]}
